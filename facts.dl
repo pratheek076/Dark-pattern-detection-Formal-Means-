@@ -1,0 +1,28 @@
+element(0, "div").
+element(1, "div").
+element(2, "div").
+element(3, "div").
+element(4, "div").
+element(5, "div").
+element(6, "button").
+button_text(6, "customize").
+element(7, "button").
+button_text(7, "reject all").
+element(8, "button").
+button_text(8, "accept all").
+
+.decl element(id:number, tag:symbol)
+.decl button_text(id:number, text:symbol)
+
+.decl has_reject_button()
+has_reject_button() :- 
+    button_text(_, text), 
+    contains("reject", text).
+
+.decl missing_reject(message:symbol)
+
+missing_reject("Missing reject button") :- 
+    element(_, "button"),     
+    !has_reject_button().
+
+.output missing_reject
